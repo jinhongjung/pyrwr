@@ -14,7 +14,7 @@ def read_graph(path):
         base : int
             base of node ids of the graph
     '''
-    X = np.loadtxt(path, dtype=int, comments='%')
+    X = np.loadtxt(path, dtype=float, comments='%')
     m, n = X.shape
 
     if n == 2:

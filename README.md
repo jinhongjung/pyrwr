@@ -2,10 +2,22 @@
 **Py**thon Implementation for **R**andom **W**alk with **R**estart (PyRWR).  
 
 Random Walk with Restart (RWR) is one of famous link analysis algorithms, which measures node-to-node proximities in arbitrary types of graphs (networks).
-The representative applications include various real-world graph mining tasks such as personalized node ranking, recommendation in graphs such as 'who you may know', and anormaly detection.  
+The representative applications include various real-world graph mining tasks such as personalized node ranking, recommendation in graphs (e.g., 'who you may know'), and anormaly detection.  
 
 `pyrwr` aims to implement algorithms for computing RWR scores in Python based on numpy and scipy.
 More specifically, `pyrwr` focuses on computing a single source RWR score vector w.r.t. a given query (seed) node, which is used for a personalized ranking of the node. 
+Besides RWR, `pyrwr` supports computing Personalized PageRank (PPR) and PageRank which are well-known variants of RWR.
+
+The supported features of `pyrwr` are:
+* Query types (see the details in [])
+	- Random Walk with Restart (RWR): personalized ranking; only a single seed is allowed
+	- Personalized PageRank (PPR): personalized ranking; multiple seeds are allowed
+	- PageRank: global ranking; all nodes are used as seeds
+* Graph types (see the details in [])
+	- Unweighted/weighted graphs
+	- Directed graphs
+	- Undirected graphs (not yet, coming soon)
+	- Bipartite networks (not yet, coming soon)
 
 ### Caution
 **This repository is currentely under development and testing!**
@@ -16,6 +28,14 @@ To install this package, type the following:
 cd pyrwr
 pip install -r requirements.txt
 python setup.py install
+```
+
+These will execute the installation of python modules required by this package. 
+The name of the installed program is `pyrwr`. 
+If you want to validate whether the installation is successfully finished, type
+the following command:
+```bash
+pyrwr --help
 ```
 
 ### Requirements
@@ -37,21 +57,96 @@ The detailed format of the input and output files is described below.
 ### Input Format
 The default input of `pyrwr` represents the edge list of a graph with the following format (tab separated):
 ```
-# format: source \t target
-0	1
-2	3
+# format: source (int) \t target (int)
+1	2
 1	4
+2	3
 ...
 ```
+The above example represents an unweighted graph where each line indicates an edge from source to target. 
+In this case, the edge weight is set to 1 uniformly. 
+To vary weight edge by edge, use the following format:
+
+```
+# format: source (int) \t target (int) \t weight (float)
+1	2	1.5	
+1	4	3.5
+2	3	6.0
+...
+```
+Note that RWR is defined on positively weighted networks; thus, only positive weights are allowed. 
+
 
 ### Output Format
 The default output of `pyrwr` contains the single source RWR score vector w.r.t. the given seed node as follows:
 ```
 # format : an RWR score of i-th node
 0.1232e-3
-0.2349e-4
+0.0349e-4
 ...
 ```
+
+## How to Use `pyrwr` in My Codes?
+The following example shows how to import `pyrwr` and compute an RWR query.
+
+```python
+from pyrwr.rwr import RWR
+
+rwr = RWR()
+rwr.read_graph(input_graph)
+r = rwr.compute(seed, c, epsilon, max_iters)
+```
+Note that `seed` should be `int`.
+
+For a PPR query, see the following code:
+```python
+from pyrwr.ppr import PPR
+
+ppr = PPR()
+ppr.read_graph(input_graph)
+r = ppr.compute(seeds, c, epsilon, max_iters)
+```
+In this case, `seeds` is the list of seeds. 
+
+For a PageRank query, use the following snippet:
+```python
+from pyrwr.pagerank import PageRank
+
+pagerank = PageRank()
+pagerank.read_graph(input_graph)
+r = pagerank.compute(c, epsilon, max_iters)
+```
+Note that for `pagerank`, we do not need to specify seeds since `pagerank` automatically sets required seeds.
+
+
+## Arguments of `pyrwr`
+We summarize the input arguments of `pyrwr` in the following table:
+
+| Arguments     | Query Type | Explanation       | Default       | 
+| --------------|:------:|-------------------|:-------------:|
+| `query-type` | `common` | Query type among [rwr, ppr, pagerank] | `None`|
+| `input-path` | `common` | Input path for a graph | `None`|
+| `output-path` | `common` | Output path for storing a query result | `None`|
+| `seeds` | `rwr` | A single seed node id | `None`|
+| `seeds` | `ppr` | File path for seeds (`str`) or list of seeds (`list`) | `[]`|
+| `c` | `common` | Restart probablity (`rwr`) or jumping probability (otherwise) | `0.15`|
+| `epsilon` | `common` | Error tolerance for power iteration | `1e-9`|
+| `max-iters` | `common` | Maximum number of iterations for power iteration | `100`|
+| `handles_deadend` | `common` | If true, handles the deadend issue | `True`|
+
+The value of `Query Type` in the above table is one of the followings:
+* `common`: parameter of all of `rwr`, `ppr`, and `pagerank`
+* `rwr`: parameter of `rwr`
+* `ppr`: parameter of `ppr`
+* `pagerank`: parameter of `pagerank`
+
+Note the followings:
+* If you want to compute `pagerank` query, then do not need to specify `seeds`.
+* For directed graphs, there might be deadend nodes whose outdegree is zero. In this case, a naive power iteration would incur leaking out scores. 
+`handles_deadend` exists for such issue handling deadend nodes. With `handles_dead`, you can guarantee that the sum of a score vector is 1.
+Otherwise, the sum would less than 1 in directed graphs. 
+The strategy `pyrwr` exploits is that whenever a random surfer visits a deadend node, go back to a seed node (or one of seed nodes), and restart.
+See this for the detailed technique of the strategy.
 
 ## Todo
 - [x] to implement a function for reading an input graph
@@ -87,4 +182,4 @@ The default output of `pyrwr` contains the single source RWR score vector w.r.t.
 	- [x] to polish tqdm things
 - [x] to add comments
 - [ ] to prepare setup process
-- [ ] to write documents
+- [x] to write documents
