@@ -2,6 +2,18 @@ import numpy as np
 from scipy.sparse import csr_matrix
 
 def read_graph(path):
+    '''
+    Read the graph from the path
+
+    inputs
+        path : str
+            path for the graph
+    outputs
+        A : csr_matrix
+            sparse adjacency matrix
+        base : int
+            base of node ids of the graph
+    '''
 	X = np.loadtxt(path, dtype=int, comments='%')
 	m, n = X.shape
 
@@ -31,8 +43,3 @@ def read_graph(path):
 	A = csr_matrix((data, (row, col)), shape=(n, n))
 
 	return A, base.astype(int)
-
-if __name__ == "__main__":
-	path = './data/sample.tsv'
-	read_graph(path)
-

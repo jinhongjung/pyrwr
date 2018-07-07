@@ -73,7 +73,6 @@ The default output of `pyrwr` contains the single source RWR score vector w.r.t.
 	- [x] is the graph positively weighted?
 	- [x] is the given seed's id out of range?
 	- [x] is the format of the given data invalid?
-	- [ ] does the graph contain self-looped nodes?
 	- [ ] does the graph contain deadend nodes?
 	- [x] is the range of node ids invalid?
 - [ ] to perform tests on various settings
@@ -85,4 +84,5 @@ The default output of `pyrwr` contains the single source RWR score vector w.r.t.
 - [ ] to add logging with logger and tqdm
 	- [ ] to polish tqdm things
 - [ ] to add comments
+- [ ] to prepare setup process
 - [ ] to write documents

@@ -9,23 +9,29 @@ def process_query(input_path, output_path, seed, c=0.15, epsilon=1e-9,
     '''
     Computes a single source RWR score vector w.r.t. a given seed.
 
-    input_path : str
-        path for the graph data
-    output_path : str
-        path for storing an RWR score vector
-    seed : int
-        seed (query) node id
-    c : float
-        restart probability
-    epsilon : float
-        error tolerance for power iteration
-    max_iters : int
-        maximum number of iterations for power iteration
-    handles_deadend : bool
-        if true, it will handle the deadend issue in power iteration
-        otherwise, it won't, i.e., no guarantee for sum of RWR scores
-        to be 1 in directed graphs
+    inputs
+        input_path : str
+            path for the graph data
+        output_path : str
+            path for storing an RWR score vector
+        seed : int
+            seed (query) node id
+        c : float
+            restart probability
+        epsilon : float
+            error tolerance for power iteration
+        max_iters : int
+            maximum number of iterations for power iteration
+        handles_deadend : bool
+            if true, it will handle the deadend issue in power iteration
+            otherwise, it won't, i.e., no guarantee for sum of RWR scores
+            to be 1 in directed graphs
+    outputs
+        r : ndarray
+            RWR score vector
+
     '''
+
     rwr = RWR()
     rwr.read_graph(input_path)
     r = rwr.compute(seed, c, epsilon, max_iters)
