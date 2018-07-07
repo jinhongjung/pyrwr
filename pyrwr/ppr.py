@@ -2,18 +2,19 @@ import numpy as np
 from utils import iterator
 from .pyrwr import PyRWR
 
-class RWR(PyRWR):
+class PPR(PyRWR):
     def __init__(self):
         pass
 
-    def compute(self, seed, c=0.15, epsilon=1e-6, max_iters=100,
+    def compute(self, seeds, c=0.15, epsilon=1e-6, max_iters=100,
             handles_deadend=True):
+
         '''
-        Compute the RWR score vector w.r.t. the seed node
+        Compute the PPR score vector w.r.t. the seed node
 
         inputs
-            seed : int
-                seed (query) node id
+            seeds : list
+                list of seeds
             c : float
                 restart probability
             epsilon : float
@@ -26,17 +27,18 @@ class RWR(PyRWR):
                 to be 1 in directed graphs
         outputs
             r : ndarray
-                RWR score vector
+                PPR score vector
         '''
 
         self.normalize()
-        seed = seed - self.base # adjust range of seed node id
-
-        q = np.zeros((self.n, 1))
-        if seed < 0 or seed >= self.n:
+        seeds = [seed - self.base for seed in seeds]
+        if len(seeds) is 0:
+            raise ValueError('Seeds are empty')
+        if min(seeds) < 0 or max(seeds) >= self.n:
             raise ValueError('Out of range of seed node id')
 
-        q[seed] = 1.0
+        q = np.zeros((self.n, 1))
+        q[seeds] = 1.0/len(seeds)
 
         r, residuals = iterator.iterate(self.nAT, q, c, epsilon,
                 max_iters, handles_deadend)

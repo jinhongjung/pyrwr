@@ -2,18 +2,17 @@ import numpy as np
 from utils import iterator
 from .pyrwr import PyRWR
 
-class RWR(PyRWR):
+class PageRank(PyRWR):
     def __init__(self):
         pass
 
-    def compute(self, seed, c=0.15, epsilon=1e-6, max_iters=100,
+    def compute(self, c=0.15, epsilon=1e-6, max_iters=100,
             handles_deadend=True):
+
         '''
-        Compute the RWR score vector w.r.t. the seed node
+        Compute the PageRank score vector (global ranking)
 
         inputs
-            seed : int
-                seed (query) node id
             c : float
                 restart probability
             epsilon : float
@@ -26,17 +25,13 @@ class RWR(PyRWR):
                 to be 1 in directed graphs
         outputs
             r : ndarray
-                RWR score vector
+                PageRank score vector
         '''
 
         self.normalize()
-        seed = seed - self.base # adjust range of seed node id
 
-        q = np.zeros((self.n, 1))
-        if seed < 0 or seed >= self.n:
-            raise ValueError('Out of range of seed node id')
-
-        q[seed] = 1.0
+        q = np.ones((self.n, 1))
+        q = q/self.n
 
         r, residuals = iterator.iterate(self.nAT, q, c, epsilon,
                 max_iters, handles_deadend)

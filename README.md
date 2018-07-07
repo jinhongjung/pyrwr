@@ -26,9 +26,9 @@ python setup.py install
 # Usage
 We provide the following simple command line usage:
 ```bash
-pyrwr --input-path data/sample.tsv --output-path output/scores.tsv --seed 987
+pyrwr --method rwr --input-path data/sample.tsv --output-path output/scores.tsv --seeds 987
 ```
-This will compute an RWR score vector w.r.t. the given seed node `--seed` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`.
+This will compute an RWR score vector w.r.t. the given seed node `--seeds` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`.
 The detailed format of the input and output files is described below.
 
 # Input and Output Format
@@ -58,8 +58,8 @@ The default output of `pyrwr` contains the single source RWR score vector w.r.t.
 	- [x] row-normalization
 	- [x] power-iteration
 	- [x] rwr
-	- [ ] ppr
-	- [ ] pagerank
+	- [x] ppr
+	- [x] pagerank
 - [x] to process users' arguments from command lines (python-fire)
 	- [ ] to update it if necessary
 	- [ ] to write a result to a file
