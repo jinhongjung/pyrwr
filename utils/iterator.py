@@ -32,8 +32,8 @@ def iterate(A, q, c=0.15, epsilon=1e-6,
     old_x = q
     residuals = np.zeros((max_iters, 1))
 
-    pbar = trange(max_iters)
-    for i in pbar:
+    pbar = tqdm(total=max_iters, leave=False)
+    for i in range(max_iters):
         if handles_deadend:
             x = (1-c)*(A.dot(old_x))
             S = np.sum(x)
@@ -45,8 +45,12 @@ def iterate(A, q, c=0.15, epsilon=1e-6,
         pbar.set_description("Residual at %d-iter: %e" % (i, residuals[i]))
 
         if residuals[i] <= epsilon:
+           pbar.set_description("Scores have converged")
+           pbar.update(max_iters)
            break
 
         old_x = x
+        pbar.update(1)
+    pbar.close()
 
-    return x, residuals
+    return x, residuals[0:i+1]

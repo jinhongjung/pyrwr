@@ -82,7 +82,8 @@ The default output of `pyrwr` contains the single source RWR score vector w.r.t.
 	- [ ] tests on weighted & undirected graphs
 	- [ ] tests on deadend nodes
 - [ ] to add logging with logger and tqdm
-	- [ ] to polish tqdm things
-- [ ] to add comments
+	- [ ] to add logger
+	- [x] to polish tqdm things
+- [x] to add comments
 - [ ] to prepare setup process
 - [ ] to write documents
