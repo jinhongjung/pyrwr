@@ -109,7 +109,7 @@ ppr.read_graph(input_graph)
 r = ppr.compute(seeds, c, epsilon, max_iters)
 ```
 In this case, `seeds` is the list of seeds. `r` is the PPR score vector w.r.t. `seeds`.
-`r` is used for personalized node ranking related to all seeds in the `seeds` list.
+Note that the PPR vector `r` is used for obtaining the personalized node ranking list related to all seeds in the `seeds` list.
 
 For the PageRank query, use the following snippet:
 ```python
