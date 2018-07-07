@@ -1,5 +1,39 @@
 # pyrwr
-Python Implementation for Random Walk with Restart (RWR). 
+Python Implementation for Random Walk with Restart (RWR).  
+
+`RWR` is one of famous link analysis algorithms, which measures node-to-node proximities in arbitrary types of graphs (networks).
+The representative applications include various real-world graph mining tasks such as personalized node ranking, recommendation in graphs such as 'who you may know', and anormaly detection.
+`pyrwr` aims to implement algorithms for computing `RWR` scores in Python.
+More specifically, `pyrwr` focuses on computing a single source RWR score vector w.r.t. a given query (seed) node, which is used for a personalized ranking of the node. 
+
+# Usage
+We provides the following simple command line usage:
+```
+pyrwr --input-path data/sample.tsv --output-path output/scores.tsv --seed 987
+```
+This will compute an RWR score vector w.r.t. the given seed node `--seed` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`.
+The detailed format of the input and output files is described below.
+
+# Input and Output Format
+
+## Input Format
+The default input of `pyrwr` represents the adjacency list of a graph with the following format (tab separated):
+```
+# format: source \t target
+0	1
+2	3
+1	4
+...
+```
+
+## Output Format
+The default output of `pyrwr` contains the single source RWR score vector w.r.t. the given seed node as follows:
+```
+# format : an RWR score
+0.1232e-3
+0.2349e-4
+...
+```
 
 # Todo
 - [x] to implement a function for reading an input graph
@@ -11,6 +45,7 @@ Python Implementation for Random Walk with Restart (RWR).
 	- [ ] pagerank
 - [x] to process users' arguments from command lines (python-fire)
 	- [ ] to update it if necessary
+	- [ ] to write a result to a file
 - [ ] to support the following graph types:
 	- [x] directed graph
 	- [x] unweighted graph/weighted graph
