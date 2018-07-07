@@ -1,15 +1,16 @@
 # pyrwr
-Python Implementation for Random Walk with Restart (RWR).  
+**Py**thon Implementation for **R**andom **W**alk with **R**estart (PyRWR).  
 
-`RWR` is one of famous link analysis algorithms, which measures node-to-node proximities in arbitrary types of graphs (networks).
-The representative applications include various real-world graph mining tasks such as personalized node ranking, recommendation in graphs such as 'who you may know', and anormaly detection.
-`pyrwr` aims to implement algorithms for computing `RWR` scores in Python based on numpy and scipy.
+Random Walk with Restart (RWR) is one of famous link analysis algorithms, which measures node-to-node proximities in arbitrary types of graphs (networks).
+The representative applications include various real-world graph mining tasks such as personalized node ranking, recommendation in graphs such as 'who you may know', and anormaly detection.  
+
+`pyrwr` aims to implement algorithms for computing RWR scores in Python based on numpy and scipy.
 More specifically, `pyrwr` focuses on computing a single source RWR score vector w.r.t. a given query (seed) node, which is used for a personalized ranking of the node. 
 
-## Caution
+### Caution
 **This repository is currentely under development and testing!**
 
-# Installation
+## Installation [currently not suppported]
 To install this package, type the following:
 ```bash
 cd pyrwr
@@ -17,23 +18,23 @@ pip install -r requirements.txt
 python setup.py install
 ```
 
-## Requirements
+### Requirements
 * numpy
 * scipy
 * tqdm
 * fire
 
-# Usage
+## Usage
 We provide the following simple command line usage:
 ```bash
-pyrwr --method rwr --input-path data/sample.tsv --output-path output/scores.tsv --seeds 987
+pyrwr --query-type rwr --input-path data/sample.tsv --output-path output/scores.tsv --seeds 987
 ```
-This will compute an RWR score vector w.r.t. the given seed node `--seeds` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`.
+This will compute an RWR score vector w.r.t. the given seed node `--seeds` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`. `--query-type` specifies the type of query, e.g., this example indicates an RWR query.
 The detailed format of the input and output files is described below.
 
-# Input and Output Format
+## Input and Output Format
 
-## Input Format
+### Input Format
 The default input of `pyrwr` represents the edge list of a graph with the following format (tab separated):
 ```
 # format: source \t target
@@ -43,7 +44,7 @@ The default input of `pyrwr` represents the edge list of a graph with the follow
 ...
 ```
 
-## Output Format
+### Output Format
 The default output of `pyrwr` contains the single source RWR score vector w.r.t. the given seed node as follows:
 ```
 # format : an RWR score of i-th node
@@ -52,7 +53,7 @@ The default output of `pyrwr` contains the single source RWR score vector w.r.t.
 ...
 ```
 
-# Todo
+## Todo
 - [x] to implement a function for reading an input graph
 - [x] to implement a class for computing RWR
 	- [x] row-normalization
