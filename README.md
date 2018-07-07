@@ -46,7 +46,7 @@ The default input of `pyrwr` represents the edge list of a graph with the follow
 ## Output Format
 The default output of `pyrwr` contains the single source RWR score vector w.r.t. the given seed node as follows:
 ```
-# format : an RWR score
+# format : an RWR score of i-th node
 0.1232e-3
 0.2349e-4
 ...
@@ -70,12 +70,12 @@ The default output of `pyrwr` contains the single source RWR score vector w.r.t.
 	- [ ] undirected graph
 	- [ ] bipartite network
 - [ ] to add conditional statements for checking the following
-	- [ ] is the graph positively weighted?
-	- [ ] is the given seed's id out of range?
-	- [ ] is the format of the given data invalid?
+	- [x] is the graph positively weighted?
+	- [x] is the given seed's id out of range?
+	- [x] is the format of the given data invalid?
 	- [ ] does the graph contain self-looped nodes?
 	- [ ] does the graph contain deadend nodes?
-	- [ ] is the range of node ids invalid?
+	- [x] is the range of node ids invalid?
 - [ ] to perform tests on various settings
 	- [ ] tests on unwiehgted & directed graphs
 	- [ ] tests on unweighted & undirected graphs
