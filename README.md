@@ -65,7 +65,7 @@ The default input of `pyrwr` represents the edge list of a graph with the follow
 ```
 The above example represents an unweighted graph where each line indicates an edge from source to target. 
 In this case, the edge weight is set to 1 uniformly. 
-To vary weight edge by edge, use the following format:
+To vary weights edge by edge, use the following format:
 
 ```
 # format: source (int) \t target (int) \t weight (float)
@@ -96,7 +96,9 @@ rwr = RWR()
 rwr.read_graph(input_graph)
 r = rwr.compute(seed, c, epsilon, max_iters)
 ```
-Note that `seed` should be `int`.
+Note that `seed` should be `int`. The format of the file at `input_graph` should follow one of the above input formats.
+`r` is a column vector (ndarray) having the RWR score vector w.r.t. `seed` node.
+The shape of `r` will be (n, 1) where `n` is the number of nodes.
 
 For a PPR query, see the following code:
 ```python
