@@ -19,7 +19,7 @@ The supported features of `pyrwr` are:
 	- Undirected graphs (not yet, coming soon)
 	- Bipartite networks (not yet, coming soon)
 * Algorithm types (see the details in [])
-	- Power iteration (default, exact)
+	- Power iteration (default, exact as anytime algorithms)
 	- Forward push (approximate, not yet)
 
 ### Caution
