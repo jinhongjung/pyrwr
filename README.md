@@ -8,7 +8,7 @@ More specifically, `pyrwr` focuses on computing a single source RWR score vector
 
 # Usage
 We provides the following simple command line usage:
-```
+```bash
 pyrwr --input-path data/sample.tsv --output-path output/scores.tsv --seed 987
 ```
 This will compute an RWR score vector w.r.t. the given seed node `--seed` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`.
@@ -17,7 +17,7 @@ The detailed format of the input and output files is described below.
 # Input and Output Format
 
 ## Input Format
-The default input of `pyrwr` represents the adjacency list of a graph with the following format (tab separated):
+The default input of `pyrwr` represents the edge list of a graph with the following format (tab separated):
 ```
 # format: source \t target
 0	1
