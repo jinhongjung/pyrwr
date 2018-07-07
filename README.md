@@ -3,11 +3,25 @@ Python Implementation for Random Walk with Restart (RWR).
 
 `RWR` is one of famous link analysis algorithms, which measures node-to-node proximities in arbitrary types of graphs (networks).
 The representative applications include various real-world graph mining tasks such as personalized node ranking, recommendation in graphs such as 'who you may know', and anormaly detection.
-`pyrwr` aims to implement algorithms for computing `RWR` scores in Python.
+`pyrwr` aims to implement algorithms for computing `RWR` scores in Python based on numpy and scipy.
 More specifically, `pyrwr` focuses on computing a single source RWR score vector w.r.t. a given query (seed) node, which is used for a personalized ranking of the node. 
 
 ## Caution
 **This repository is currentely under development and testing!**
+
+# Installation
+To install this package, type the following:
+```bash
+cd pyrwr
+pip install -r requirements.txt
+python setup.py install
+```
+
+## Requirements
+* numpy
+* scipy
+* tqdm
+* fire
 
 # Usage
 We provide the following simple command line usage:
