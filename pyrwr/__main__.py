@@ -1,19 +1,32 @@
 import sys
+import fire
 from utils import reader
 from pyrwr.rwr import RWR
 import numpy as np
 
-def main():
-    data = './data/sample.tsv'
-    A = reader.read_graph(data)
-    rwr = RWR(A)
+def process_query(data_path, seed, c=0.15, epsilon=1e-9,
+            max_iters=100):
+    '''
+    Computes a single source RWR score vector w.r.t. a given seed.
 
-    s = 989
-    c = 0.0001
-    epsilon = 1e-30
-    max_iters = 3000
-    r = rwr.compute(s, c, epsilon, max_iters)
-    print(np.sum(r))
+    data_path : str
+        path for the graph data
+    seed : int
+        seed (query) node id
+    c : float
+        restart probability
+    epsilon : float
+        error tolerance for power iteration
+    max_iters : int
+        maximum number of iterations for power iteration
+    '''
+    A = reader.read_graph(data_path)
+    rwr = RWR(A)
+    r = rwr.compute(seed, c, epsilon, max_iters)
+    #print(np.sum(r))
+
+def main():
+    fire.Fire(process_query)
 
 if __name__ == "__main__":
     sys.exit(main())

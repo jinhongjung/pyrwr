@@ -1,5 +1,5 @@
 # pyrwr
-Python Implementation for Random Walk with Restart (RWR)
+Python Implementation for Random Walk with Restart (RWR). 
 
 # Todo
 - [x] to implement a function for reading an input graph
@@ -9,7 +9,8 @@ Python Implementation for Random Walk with Restart (RWR)
 	- [x] rwr
 	- [ ] ppr
 	- [ ] pagerank
-- [ ] to process users' arguments from command lines
+- [x] to process users' arguments from command lines (python-fire)
+	- [ ] to update if necessary
 - [ ] to support the following graph types:
 	- [x] directed graph
 	- [x] unweighted graph/weighted graph
