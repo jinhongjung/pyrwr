@@ -49,7 +49,7 @@ We provide the following simple command line usage:
 ```bash
 pyrwr --query-type rwr --input-path data/sample.tsv --output-path output/scores.tsv --seeds 987
 ```
-This will compute an RWR score vector w.r.t. the given seed node `--seeds` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`. `--query-type` specifies the type of query, e.g., this example indicates an RWR query.
+This will compute an RWR score vector w.r.t. the seed node given by `--seeds` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`. `--query-type` specifies the type of query, e.g., this example indicates an RWR query.
 The detailed format of the input and output files is described below.
 
 ## Input and Output Format
@@ -146,7 +146,7 @@ The value of `Query Type` in the above table is one of the followings:
 Note the followings:
 * If you want to compute `pagerank` query, then do not need to specify `seeds`.
 * For directed graphs, there might be deadend nodes whose outdegree is zero. In this case, a naive power iteration would incur leaking out scores. 
-`handles_deadend` exists for such issue handling deadend nodes. With `handles_dead`, you can guarantee that the sum of a score vector is 1.
+`handles_deadend` exists for such issue handling deadend nodes. With `handles_deadend`, you can guarantee that the sum of a score vector is 1.
 Otherwise, the sum would less than 1 in directed graphs. 
 The strategy `pyrwr` exploits is that whenever a random surfer visits a deadend node, go back to a seed node (or one of seed nodes), and restart.
 See this for the detailed technique of the strategy.
