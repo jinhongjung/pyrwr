@@ -10,7 +10,7 @@ More specifically, `pyrwr` focuses on computing a single source RWR score vector
 **This repository is currentely under development and testing!**
 
 # Usage
-We provides the following simple command line usage:
+We provide the following simple command line usage:
 ```bash
 pyrwr --input-path data/sample.tsv --output-path output/scores.tsv --seed 987
 ```
