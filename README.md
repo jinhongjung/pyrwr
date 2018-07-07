@@ -6,6 +6,9 @@ The representative applications include various real-world graph mining tasks su
 `pyrwr` aims to implement algorithms for computing `RWR` scores in Python.
 More specifically, `pyrwr` focuses on computing a single source RWR score vector w.r.t. a given query (seed) node, which is used for a personalized ranking of the node. 
 
+## Caution
+**This repository is currentely under development and testing!**
+
 # Usage
 We provides the following simple command line usage:
 ```bash
