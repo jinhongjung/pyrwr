@@ -10,7 +10,7 @@ Python Implementation for Random Walk with Restart (RWR).
 	- [ ] ppr
 	- [ ] pagerank
 - [x] to process users' arguments from command lines (python-fire)
-	- [ ] to update if necessary
+	- [ ] to update it if necessary
 - [ ] to support the following graph types:
 	- [x] directed graph
 	- [x] unweighted graph/weighted graph
@@ -30,6 +30,7 @@ Python Implementation for Random Walk with Restart (RWR).
 	- [ ] tests on weighted & directed graphs
 	- [ ] tests on weighted & undirected graphs
 	- [ ] tests on deadend nodes
-- [ ] to add logger
+- [ ] to add logging with logger and tqdm
+	- [ ] to polish tqdm things
 - [ ] to add comments
 - [ ] to write documents

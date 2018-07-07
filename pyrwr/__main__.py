@@ -5,7 +5,7 @@ from pyrwr.rwr import RWR
 import numpy as np
 
 def process_query(data_path, seed, c=0.15, epsilon=1e-9,
-            max_iters=100):
+            max_iters=100, handles_deadend=True):
     '''
     Computes a single source RWR score vector w.r.t. a given seed.
 
@@ -19,6 +19,10 @@ def process_query(data_path, seed, c=0.15, epsilon=1e-9,
         error tolerance for power iteration
     max_iters : int
         maximum number of iterations for power iteration
+    handles_deadend : bool
+        if true, it will handle the deadend issue in power iteration
+        otherwise, it won't, i.e., no guarantee for sum of RWR scores
+        to be 1 in directed graphs
     '''
     A = reader.read_graph(data_path)
     rwr = RWR(A)

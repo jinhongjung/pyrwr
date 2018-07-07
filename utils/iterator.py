@@ -3,7 +3,7 @@ from numpy.linalg import norm
 from tqdm import tqdm, trange
 
 def iterate(A, q, c=0.15, epsilon=1e-6,
-        max_iters=100, norm_type=1, handles_deadend=True):
+        max_iters=100, handles_deadend=True, norm_type=1):
     """
     """
     x = q
