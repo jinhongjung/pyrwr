@@ -108,9 +108,10 @@ ppr = PPR()
 ppr.read_graph(input_graph)
 r = ppr.compute(seeds, c, epsilon, max_iters)
 ```
-In this case, `seeds` is the list of seeds. 
+In this case, `seeds` is the list of seeds. `r` is the PPR score vector w.r.t. `seeds`.
+`r` is used for personalized node ranking related to all seeds in the `seeds` list.
 
-For a PageRank query, use the following snippet:
+For the PageRank query, use the following snippet:
 ```python
 from pyrwr.pagerank import PageRank
 
@@ -118,7 +119,7 @@ pagerank = PageRank()
 pagerank.read_graph(input_graph)
 r = pagerank.compute(c, epsilon, max_iters)
 ```
-Note that for `pagerank`, we do not need to specify seeds since `pagerank` automatically sets required seeds.
+Note that for `pagerank`, we do not need to specify seeds since PageRank is a global ranking; thus, it automatically sets required seeds (i.e., all nodes are used as seeds).
 
 
 ## Arguments of `pyrwr`
