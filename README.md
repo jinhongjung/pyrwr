@@ -169,7 +169,7 @@ See this for the detailed technique of the strategy.
 	- [x] directed graph
 	- [x] unweighted graph/weighted graph
 	- [x] directed graph having deadend nodes
-	- [ ] undirected graph
+	- [x] undirected graph
 	- [ ] bipartite network
 - [ ] to add conditional statements for checking the following
 	- [x] is the graph positively weighted?

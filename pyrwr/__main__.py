@@ -7,7 +7,7 @@ from pyrwr.ppr import PPR
 from pyrwr.pagerank import PageRank
 import numpy as np
 
-def process_query(query_type, input_path, output_path, seeds=[], c=0.15,
+def process_query(query_type, graph_type, input_path, output_path, seeds=[], c=0.15,
         epsilon=1e-9, max_iters=100, handles_deadend=True):
     '''
     Processed a query to obtain a score vector w.r.t. the seeds
@@ -15,6 +15,8 @@ def process_query(query_type, input_path, output_path, seeds=[], c=0.15,
     inputs
         query_type : str
             type of querying {'rwr', 'ppr', 'pagerank'}
+        graph_type: : str
+            type of graph {'directed', 'undirected', 'bipartite'}
         input_path : str
             path for the graph data
         output_path : str
@@ -42,16 +44,16 @@ def process_query(query_type, input_path, output_path, seeds=[], c=0.15,
         if type(seeds) is not int:
             raise TypeError('Seeds should be a single integer for RWR')
         rwr = RWR()
-        rwr.read_graph(input_path)
+        rwr.read_graph(input_path, graph_type)
         r = rwr.compute(int(seeds), c, epsilon, max_iters)
     elif query_type == 'ppr':
         seeds = get_seeds(seeds)
         ppr = PPR()
-        ppr.read_graph(input_path)
+        ppr.read_graph(input_path, graph_type)
         r = ppr.compute(seeds, c, epsilon, max_iters)
     elif query_type == 'pagerank':
         pagerank = PageRank()
-        pagerank.read_graph(input_path)
+        pagerank.read_graph(input_path, graph_type)
         r = pagerank.compute(c, epsilon, max_iters)
 
     write_vector(output_path, r)
