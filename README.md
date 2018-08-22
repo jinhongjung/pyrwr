@@ -24,6 +24,7 @@ The supported features of `pyrwr` are:
 
 ### Caution
 **This repository is currentely under development and testing!**
+**Updates will continue after September!**
 
 ## Installation [currently not suppported]
 To install this package, type the following:
