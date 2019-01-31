@@ -24,7 +24,9 @@ The supported features of `pyrwr` are:
 
 ### Caution
 **This repository is currentely under development and testing!**
-**Updates will continue after September!**
+**Updates will continue after February!**
+
+- If you are interested in studying random walk based ranking models such as PageRank and RWR, please consider this tutorial (https://github.com/jinhongjung/tutorial-on-link-analysis) that provides how to correctly implement the algorithms of those model in Python and to analyze real-world networks using those ranking models.
 
 ## Installation [currently not suppported]
 To install this package, type the following:
