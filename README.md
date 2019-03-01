@@ -4,36 +4,33 @@
 Random Walk with Restart (RWR) is one of famous link analysis algorithms, which measures node-to-node proximities in arbitrary types of graphs (networks).
 The representative applications include various real-world graph mining tasks such as personalized node ranking, recommendation in graphs (e.g., 'who you may know'), and anormaly detection.  
 
-`pyrwr` aims to implement algorithms for computing RWR scores in Python based on numpy and scipy.
-More specifically, `pyrwr` focuses on computing a single source RWR score vector w.r.t. a given query (seed) node, which is used for a personalized ranking of the node. 
+`pyrwr` aims to implement algorithms for computing RWR scores based on *Power Iteration* in Python based on numpy and scipy.
+More specifically, `pyrwr` focuses on computing a single source RWR score vector w.r.t. a given query (seed) node, which is used for a personalized node ranking w.r.t. the querying node. 
 Besides RWR, `pyrwr` supports computing Personalized PageRank (PPR) and PageRank which are well-known variants of RWR.
 
 The supported features of `pyrwr` are:
-* Query types (see the details in [])
+* Query types
 	- Random Walk with Restart (RWR): personalized ranking; only a single seed is allowed
 	- Personalized PageRank (PPR): personalized ranking; multiple seeds are allowed
 	- PageRank: global ranking; all nodes are used as seeds
-* Graph types (see the details in [])
+* Graph types
 	- Unweighted/weighted graphs
 	- Directed graphs
 	- Undirected graphs (not yet, coming soon)
 	- Bipartite networks (not yet, coming soon)
-* Algorithm types (see the details in [])
-	- Power iteration (default, exact as anytime algorithms)
-	- Forward push (approximate, not yet)
 
 ### Caution
 **This repository is currentely under development and testing!**
 **Updates will continue after February!**
 
-- If you are interested in studying random walk based ranking models such as PageRank and RWR, please consider this tutorial (https://github.com/jinhongjung/tutorial-on-link-analysis) that provides how to correctly implement the algorithms of those model in Python and to analyze real-world networks using those ranking models.
+- If you are interested in studying random walk based ranking models such as PageRank and RWR, please consider this tutorial (https://github.com/jinhongjung/tutorial-on-link-analysis) that provides how to correctly implement the algorithms of those models in Python and to analyze real-world networks using those ranking models.
 
 ## Installation [currently not suppported]
 To install this package, type the following:
 ```bash
 cd pyrwr
-pip install -r requirements.txt
-python setup.py install
+pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 These will execute the installation of python modules required by this package. 
@@ -172,7 +169,7 @@ See this for the detailed technique of the strategy.
 	- [x] directed graph
 	- [x] unweighted graph/weighted graph
 	- [x] directed graph having deadend nodes
-	- [x] undirected graph
+	- [ ] undirected graph
 	- [ ] bipartite network
 - [ ] to add conditional statements for checking the following
 	- [x] is the graph positively weighted?
