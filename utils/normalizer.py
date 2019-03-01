@@ -20,10 +20,12 @@ def row_normalize(A):
 
     # do row-wise sum where d is out-degree for each node
     d = A.sum(axis=1)
+    d = np.asarray(d).flatten()
 
     # handle 0 entries in d
-    d = np.maximum(d, np.ones((n, 1)))
+    d = np.maximum(d, np.ones(n))
     invd = 1.0 / d
+
     invD = spdiags(invd, 0, m, n)
 
     # compute row normalized adjacency matrix by nA = invD * A

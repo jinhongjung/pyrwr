@@ -5,20 +5,20 @@ import numpy as np
 from scipy.sparse import csr_matrix, find
 
 
-def _read_directed_graph(X):
-    row  = X[:, 0]
-    col  = X[:, 1]
+def __read_directed_graph(X):
+    rows = X[:, 0]
+    cols = X[:, 1]
     data = X[:, 2]
 
     # assume id starts from 0
-    n = int(np.amax(X[:, 0:2]) + 1)
+    n = int(np.amax(X[:, 0:2])) + 1
 
-    A = csr_matrix((data, (row, col)), shape=(n, n))
+    A = csr_matrix((data, (rows, cols)), shape=(n, n))
     return A
 
 
-def _read_undirected_graph(X):
-    _A = _read_directed_graph(X)
+def __read_undirected_graph(X):
+    _A = __read_directed_graph(X)
     A = _A + _A.T
     I, J, K = find(A)
 
@@ -53,7 +53,7 @@ def read_graph(path, graph_type):
         raise FormatError('Invalid input format')
 
     base = np.amin(X[:, 0:2])
-    max_weight = np.amin(X[:, 2])
+    min_weight = np.amin(X[:, 2])
 
     if base < 0:
         raise ValueError('Out of range of node ids: negative base')
@@ -63,15 +63,15 @@ def read_graph(path, graph_type):
     X[:, 0:2] = X[:, 0:2] - base
 
     if graph_type is "directed":
-        A = _read_directed_graph(X)
+        A = __read_directed_graph(X)
     elif graph_type is "undirected":
-        A = _read_undirected_graph(X)
+        A = __read_undirected_graph(X)
     elif graph_type is "bipartite":
         pass
     #    A = _read_bipartite_graph(X)
     else:
         raise ValueError('graph_type sould be directed, undirected, or bipartite')
 
-    print(A.count_nonzero())
+    #  print(A.count_nonzero())
 
     return A, base.astype(int)
