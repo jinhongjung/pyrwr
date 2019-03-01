@@ -155,13 +155,6 @@ The strategy `pyrwr` exploits is that whenever a random surfer visits a deadend 
 See this for the detailed technique of the strategy.
 
 ## Todo
-- [x] to implement a function for reading an input graph
-- [x] to implement a class for computing RWR
-	- [x] row-normalization
-	- [x] power-iteration
-	- [x] rwr
-	- [x] ppr
-	- [x] pagerank
 - [x] to process users' arguments from command lines (python-fire)
 	- [ ] to update it if necessary
 	- [ ] to write a result to a file
@@ -172,20 +165,12 @@ See this for the detailed technique of the strategy.
 	- [ ] undirected graph
 	- [ ] bipartite network
 - [ ] to add conditional statements for checking the following
-	- [x] is the graph positively weighted?
-	- [x] is the given seed's id out of range?
-	- [x] is the format of the given data invalid?
 	- [ ] does the graph contain deadend nodes?
-	- [x] is the range of node ids invalid?
 - [ ] to perform tests on various settings
 	- [ ] tests on unwiehgted & directed graphs
-	- [ ] tests on unweighted & undirected graphs
 	- [ ] tests on weighted & directed graphs
+	- [ ] tests on unweighted & undirected graphs
 	- [ ] tests on weighted & undirected graphs
-	- [ ] tests on deadend nodes
 - [ ] to add logging with logger and tqdm
 	- [ ] to add logger
-	- [x] to polish tqdm things
-- [x] to add comments
-- [ ] to prepare setup process
-- [x] to write documents
+- [ ] to add comments
