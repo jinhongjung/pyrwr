@@ -29,8 +29,8 @@ The supported features of `pyrwr` are:
 To install this package, type the following:
 ```bash
 cd pyrwr
-pip install -r requirements.txt
-python setup.py install
+pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 These will execute the installation of python modules required by this package. 
