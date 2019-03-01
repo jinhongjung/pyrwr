@@ -25,7 +25,7 @@ The supported features of `pyrwr` are:
 
 - If you are interested in studying random walk based ranking models such as PageRank and RWR, please consider this tutorial (https://github.com/jinhongjung/tutorial-on-link-analysis) that provides how to correctly implement the algorithms of those models in Python and to analyze real-world networks using those ranking models.
 
-## Installation [currently not suppported]
+## Installation
 To install this package, type the following:
 ```bash
 cd pyrwr
@@ -50,7 +50,7 @@ pyrwr --help
 ## Usage
 We provide the following simple command line usage:
 ```bash
-pyrwr --query-type rwr --input-path data/sample.tsv --output-path output/scores.tsv --seeds 987
+pyrwr --query-type rwr --graph-type directed --input-path data/directed/sample.tsv --output-path output/scores.tsv --seeds 987
 ```
 This will compute an RWR score vector w.r.t. the seed node given by `--seeds` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`. `--query-type` specifies the type of query, e.g., this example indicates an RWR query.
 The detailed format of the input and output files is described below.
