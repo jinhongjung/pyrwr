@@ -1,13 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import numpy as np
 from utils import iterator
 from .pyrwr import PyRWR
+
 
 class PPR(PyRWR):
     def __init__(self):
         pass
 
     def compute(self, seeds, c=0.15, epsilon=1e-6, max_iters=100,
-            handles_deadend=True):
+                handles_deadend=True):
 
         '''
         Compute the PPR score vector w.r.t. the seed node
@@ -32,15 +36,16 @@ class PPR(PyRWR):
 
         self.normalize()
         seeds = [seed - self.base for seed in seeds]
+
         if len(seeds) is 0:
             raise ValueError('Seeds are empty')
         if min(seeds) < 0 or max(seeds) >= self.n:
             raise ValueError('Out of range of seed node id')
 
         q = np.zeros((self.n, 1))
-        q[seeds] = 1.0/len(seeds)
+        q[seeds] = 1.0 / len(seeds)
 
         r, residuals = iterator.iterate(self.nAT, q, c, epsilon,
-                max_iters, handles_deadend)
+                                        max_iters, handles_deadend)
 
         return r

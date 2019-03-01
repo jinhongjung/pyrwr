@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import sys
 import os.path
 import fire
@@ -6,6 +9,7 @@ from pyrwr.rwr import RWR
 from pyrwr.ppr import PPR
 from pyrwr.pagerank import PageRank
 import numpy as np
+
 
 def process_query(query_type, graph_type, input_path, output_path, seeds=[], c=0.15,
         epsilon=1e-9, max_iters=100, handles_deadend=True):

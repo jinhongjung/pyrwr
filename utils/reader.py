@@ -1,15 +1,21 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import numpy as np
 from scipy.sparse import csr_matrix, find
+
 
 def _read_directed_graph(X):
     row  = X[:, 0]
     col  = X[:, 1]
     data = X[:, 2]
 
-    n = int(np.amax(X[:, 0:2]) + 1) # assume id starts from 0
+    # assume id starts from 0
+    n = int(np.amax(X[:, 0:2]) + 1)
 
     A = csr_matrix((data, (row, col)), shape=(n, n))
     return A
+
 
 def _read_undirected_graph(X):
     _A = _read_directed_graph(X)
@@ -19,6 +25,7 @@ def _read_undirected_graph(X):
     A = csr_matrix((np.ones(len(K)), (I, J)), shape=A.shape)
 
     return A
+
 
 def read_graph(path, graph_type):
     '''

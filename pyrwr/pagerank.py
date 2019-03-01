@@ -1,14 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import numpy as np
 from utils import iterator
 from .pyrwr import PyRWR
+
 
 class PageRank(PyRWR):
     def __init__(self):
         pass
 
     def compute(self, c=0.15, epsilon=1e-6, max_iters=100,
-            handles_deadend=True):
-
+                handles_deadend=True):
         '''
         Compute the PageRank score vector (global ranking)
 
@@ -31,9 +34,9 @@ class PageRank(PyRWR):
         self.normalize()
 
         q = np.ones((self.n, 1))
-        q = q/self.n
+        q = q / self.n
 
         r, residuals = iterator.iterate(self.nAT, q, c, epsilon,
-                max_iters, handles_deadend)
+                                        max_iters, handles_deadend)
 
         return r

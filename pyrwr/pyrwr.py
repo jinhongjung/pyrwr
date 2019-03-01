@@ -1,4 +1,8 @@
-from utils import reader, normalizer, iterator
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from utils import reader, normalizer
+
 
 class PyRWR:
     normalized = False
@@ -25,7 +29,7 @@ class PyRWR:
         '''
         Perform row-normalization of the adjacency matrix
         '''
-        if self.normalized == False:
+        if self.normalized is False:
             nA = normalizer.row_normalize(self.A)
             self.nAT = nA.T
             self.normalized = True

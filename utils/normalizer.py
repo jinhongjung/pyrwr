@@ -1,5 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import numpy as np
 from scipy.sparse import spdiags
+
 
 def row_normalize(A):
     '''
@@ -13,17 +17,16 @@ def row_normalize(A):
             row normalized matrix
     '''
     m, n = A.shape
-    # row-wise sum, d is out-degree for each node
+
+    # do row-wise sum where d is out-degree for each node
     d = A.sum(axis=1)
 
-    # handling 0 entries
+    # handle 0 entries in d
     d = np.maximum(d, np.ones((n, 1)))
     invd = 1.0 / d
-    invd = np.reshape(invd, (1,-1))
     invD = spdiags(invd, 0, m, n)
 
-    # row normalized adj. mat. 
-    nA = invD * A
+    # compute row normalized adjacency matrix by nA = invD * A
+    nA = invD.dot(A)
 
     return nA
-

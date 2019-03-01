@@ -1,13 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import numpy as np
 from utils import iterator
 from .pyrwr import PyRWR
+
 
 class RWR(PyRWR):
     def __init__(self):
         pass
 
     def compute(self, seed, c=0.15, epsilon=1e-6, max_iters=100,
-            handles_deadend=True):
+                handles_deadend=True):
         '''
         Compute the RWR score vector w.r.t. the seed node
 
@@ -30,7 +34,9 @@ class RWR(PyRWR):
         '''
 
         self.normalize()
-        seed = seed - self.base # adjust range of seed node id
+
+        # adjust range of seed node id
+        seed = seed - self.base
 
         q = np.zeros((self.n, 1))
         if seed < 0 or seed >= self.n:
@@ -39,6 +45,6 @@ class RWR(PyRWR):
         q[seed] = 1.0
 
         r, residuals = iterator.iterate(self.nAT, q, c, epsilon,
-                max_iters, handles_deadend)
+                                        max_iters, handles_deadend)
 
         return r
