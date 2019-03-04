@@ -4,7 +4,7 @@
 Random Walk with Restart (RWR) is one of famous link analysis algorithms, which measures node-to-node proximities in arbitrary types of graphs (networks).
 The representative applications include various real-world graph mining tasks such as personalized node ranking, recommendation in graphs (e.g., 'who you may know'), and anormaly detection.  
 
-`pyrwr` aims to implement algorithms for computing RWR scores based on *Power Iteration* in Python based on numpy and scipy.
+`pyrwr` aims to implement algorithms for computing RWR scores based on *Power Iteration* using numpy and scipy in Python.
 More specifically, `pyrwr` focuses on computing a single source RWR score vector w.r.t. a given query (seed) node, which is used for a personalized node ranking w.r.t. the querying node. 
 Besides RWR, `pyrwr` supports computing Personalized PageRank (PPR) and PageRank which are well-known variants of RWR.
 
