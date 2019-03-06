@@ -84,9 +84,9 @@ Note that RWR is defined on positively weighted networks; thus, only positive we
 ### Output Format
 The default output of `pyrwr` contains the single source RWR score vector w.r.t. the given seed node as follows:
 ```
-# format : an RWR score of i-th node
-0.1232e-3
-0.0349e-4
+# format : i-th node \t an RWR score of the node
+1	0.1232e-3
+2	0.0349e-4
 ...
 ```
 
@@ -154,24 +154,3 @@ Note the followings:
 Otherwise, the sum would less than 1 in directed graphs. 
 The strategy `pyrwr` exploits is that whenever a random surfer visits a deadend node, go back to a seed node (or one of seed nodes), and restart.
 See this for the detailed technique of the strategy.
-
-## Todo
-- [x] to process users' arguments from command lines (python-fire)
-	- [ ] to update it if necessary
-	- [ ] to write a result to a file
-- [ ] to support the following graph types:
-	- [x] directed graph
-	- [x] unweighted graph/weighted graph
-	- [x] directed graph having deadend nodes
-	- [ ] undirected graph
-	- [ ] bipartite network
-- [ ] to add conditional statements for checking the following
-	- [ ] does the graph contain deadend nodes?
-- [ ] to perform tests on various settings
-	- [ ] tests on unwiehgted & directed graphs
-	- [ ] tests on weighted & directed graphs
-	- [ ] tests on unweighted & undirected graphs
-	- [ ] tests on weighted & undirected graphs
-- [ ] to add logging with logger and tqdm
-	- [ ] to add logger
-- [ ] to add comments
