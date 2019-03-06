@@ -46,6 +46,7 @@ pyrwr --help
 * scipy
 * tqdm
 * fire
+* pandas
 
 ## Usage
 We provide the following simple command line usage:
