@@ -19,7 +19,7 @@ The supported features of `pyrwr` are:
 	- Undirected graphs (not yet, coming soon)
 	- Bipartite networks (not yet, coming soon)
 
-- If you are interested in studying random walk based ranking models such as PageRank and RWR, please consider this tutorial (https://github.com/jinhongjung/tutorial-on-link-analysis) that provides how to correctly implement the algorithms of those models in Python and to analyze real-world networks using those ranking models.
+If you are interested in studying random walk based ranking models such as PageRank and RWR, please consider this tutorial (https://github.com/jinhongjung/tutorial-on-link-analysis) that provides how to correctly implement the algorithms of those models in Python and to analyze real-world networks using those ranking models.
 
 ## Installation
 To install this package, type the following:
