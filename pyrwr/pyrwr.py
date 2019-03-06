@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from utils import reader, normalizer
+import numpy as np
 
 
 class PyRWR:
@@ -23,6 +24,7 @@ class PyRWR:
 
         self.A, self.base = reader.read_graph(input_path, graph_type)
         self.m, self.n = self.A.shape
+        self.node_ids = np.arange(0, self.n) + self.base
         self.normalize()
 
     def normalize(self):

@@ -33,7 +33,8 @@ class PageRank(PyRWR):
 
         self.normalize()
 
-        q = np.ones((self.n, 1))
+        #  q = np.ones((self.n, 1))
+        q = np.ones(self.n)
         q = q / self.n
 
         r, residuals = iterator.iterate(self.nAT, q, c, epsilon,

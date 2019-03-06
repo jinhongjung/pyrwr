@@ -6,7 +6,7 @@ from numpy.linalg import norm
 from tqdm import tqdm
 
 
-def iterate(A, q, c=0.15, epsilon=1e-6,
+def iterate(A, q, c=0.15, epsilon=1e-9,
             max_iters=100, handles_deadend=True, norm_type=1):
     """
     Perform power iteration for RWR, PPR, or PageRank
@@ -49,12 +49,13 @@ def iterate(A, q, c=0.15, epsilon=1e-6,
         pbar.set_description("Residual at %d-iter: %e" % (i, residuals[i]))
 
         if residuals[i] <= epsilon:
-            pbar.set_description("The iteration has converged")
-            pbar.update(max_iters)
+            pbar.set_description("The iteration has converged at %d-iter" % (i))
+            #  pbar.update(max_iters)
             break
 
         old_x = x
         pbar.update(1)
+
     pbar.close()
 
     return x, residuals[0:i + 1]

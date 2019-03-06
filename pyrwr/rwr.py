@@ -38,7 +38,8 @@ class RWR(PyRWR):
         # adjust range of seed node id
         seed = seed - self.base
 
-        q = np.zeros((self.n, 1))
+        #  q = np.zeros((self.n, 1))
+        q = np.zeros(self.n)
         if seed < 0 or seed >= self.n:
             raise ValueError('Out of range of seed node id')
 

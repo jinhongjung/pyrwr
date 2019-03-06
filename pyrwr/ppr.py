@@ -10,7 +10,7 @@ class PPR(PyRWR):
     def __init__(self):
         pass
 
-    def compute(self, seeds, c=0.15, epsilon=1e-6, max_iters=100,
+    def compute(self, seeds, c=0.15, epsilon=1e-9, max_iters=100,
                 handles_deadend=True):
 
         '''
@@ -42,7 +42,8 @@ class PPR(PyRWR):
         if min(seeds) < 0 or max(seeds) >= self.n:
             raise ValueError('Out of range of seed node id')
 
-        q = np.zeros((self.n, 1))
+        #  q = np.zeros((self.n, 1))
+        q = np.zeros(self.n)
         q[seeds] = 1.0 / len(seeds)
 
         r, residuals = iterator.iterate(self.nAT, q, c, epsilon,
