@@ -147,6 +147,5 @@ Note the followings:
 * If you want to compute `pagerank` query, then do not need to specify `seeds`.
 * For directed graphs, there might be deadend nodes whose outdegree is zero. In this case, a naive power iteration would incur leaking out scores. 
 `handles_deadend` exists for such issue handling deadend nodes. With `handles_deadend`, you can guarantee that the sum of a score vector is 1.
-Otherwise, the sum would less than 1 in directed graphs. 
+Otherwise, the sum would be less than 1 in directed graphs. 
 The strategy `pyrwr` exploits is that whenever a random surfer visits a deadend node, go back to a seed node (or one of seed nodes), and restart.
-See this for the detailed technique of the strategy.
