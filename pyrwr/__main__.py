@@ -76,8 +76,8 @@ def print_result(node_ids, r):
     df = df.sort_values(by=['Score'], ascending=False)
     df = df.reset_index(drop=True)
     df.index = df.index + 1
-    print(df[0:10])
-    print(np.sum(r))
+    # print(df[0:10])
+    # print(np.sum(r))
 
 
 def get_seeds(seeds):

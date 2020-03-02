@@ -110,6 +110,4 @@ def read_graph(path, graph_type):
     else:
         raise ValueError('graph_type sould be directed, undirected, or bipartite')
 
-    #  print(A.count_nonzero())
-
     return A, base.astype(int)

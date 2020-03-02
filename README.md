@@ -16,7 +16,7 @@ The supported features of `pyrwr` are:
 * Graph types
 	- Unweighted/weighted graphs
 	- Directed graphs
-	- Undirected graphs (not yet, coming soon)
+	- Undirected graphs 
 	- Bipartite networks (not yet, coming soon)
 
 ### Caution
@@ -67,8 +67,9 @@ The default input of `pyrwr` represents the edge list of a graph with the follow
 2	3
 ...
 ```
-The above example represents an unweighted graph where each line indicates an edge from source to target. 
+The above example represents an unweighted and directed graph where each line indicates an edge from source to target. 
 In this case, the edge weight is set to 1 uniformly. 
+The node id should be non-negative (>= 0).
 To vary weights edge by edge, use the following format:
 
 ```
@@ -78,15 +79,25 @@ To vary weights edge by edge, use the following format:
 2	3	6.0
 ...
 ```
-Note that RWR is defined on positively weighted networks; thus, only positive weights are allowed. 
+Note that 
+* RWR is defined on positively weighted networks; thus, only positive weights are allowed. 
+* If there are redundant edges in an weighted network, their weights will be summed, e.g., 
+```
+# Suppose there are the following redundant edges in the original file.
+1   2   3
+1   2   5
+---------
+# Then, their weights are summed in the final adjacency matrix as follows.
+1   2   8
+```
 
 
 ### Output Format
 The default output of `pyrwr` contains the single source RWR score vector w.r.t. the given seed node as follows:
 ```
-# format : an RWR score of i-th node
-0.1232e-3
-0.0349e-4
+# format : node id \t an RWR score of the node
+1   0.1232e-3
+2   0.0349e-4
 ...
 ```
 
@@ -97,7 +108,7 @@ The following example shows how to import `pyrwr` and compute an RWR query.
 from pyrwr.rwr import RWR
 
 rwr = RWR()
-rwr.read_graph(input_graph)
+rwr.read_graph(input_graph, graph_type)
 r = rwr.compute(seed, c, epsilon, max_iters)
 ```
 Note that `seed` should be `int`. The format of the file at `input_graph` should follow one of the above input formats.
@@ -109,7 +120,7 @@ For a PPR query, see the following code:
 from pyrwr.ppr import PPR
 
 ppr = PPR()
-ppr.read_graph(input_graph)
+ppr.read_graph(input_graph, graph_type)
 r = ppr.compute(seeds, c, epsilon, max_iters)
 ```
 In this case, `seeds` is the list of seeds. `r` is the PPR score vector w.r.t. `seeds`.
@@ -120,7 +131,7 @@ For the PageRank query, use the following snippet:
 from pyrwr.pagerank import PageRank
 
 pagerank = PageRank()
-pagerank.read_graph(input_graph)
+pagerank.read_graph(input_graph, graph_type)
 r = pagerank.compute(c, epsilon, max_iters)
 ```
 Note that for `pagerank`, we do not need to specify seeds since PageRank is a global ranking; thus, it automatically sets required seeds (i.e., all nodes are used as seeds).
@@ -132,6 +143,7 @@ We summarize the input arguments of `pyrwr` in the following table:
 | Arguments     | Query Type | Explanation       | Default       | 
 | --------------|:------:|-------------------|:-------------:|
 | `query-type` | `common` | Query type among [rwr, ppr, pagerank] | `None`|
+| `graph-type` | `common` | Graph type among [directed, undirected] | `None` |
 | `input-path` | `common` | Input path for a graph | `None`|
 | `output-path` | `common` | Output path for storing a query result | `None`|
 | `seeds` | `rwr` | A single seed node id | `None`|
@@ -154,24 +166,3 @@ Note the followings:
 Otherwise, the sum would less than 1 in directed graphs. 
 The strategy `pyrwr` exploits is that whenever a random surfer visits a deadend node, go back to a seed node (or one of seed nodes), and restart.
 See this for the detailed technique of the strategy.
-
-## Todo
-- [x] to process users' arguments from command lines (python-fire)
-	- [ ] to update it if necessary
-	- [ ] to write a result to a file
-- [ ] to support the following graph types:
-	- [x] directed graph
-	- [x] unweighted graph/weighted graph
-	- [x] directed graph having deadend nodes
-	- [ ] undirected graph
-	- [ ] bipartite network
-- [ ] to add conditional statements for checking the following
-	- [ ] does the graph contain deadend nodes?
-- [ ] to perform tests on various settings
-	- [ ] tests on unwiehgted & directed graphs
-	- [ ] tests on weighted & directed graphs
-	- [ ] tests on unweighted & undirected graphs
-	- [ ] tests on weighted & undirected graphs
-- [ ] to add logging with logger and tqdm
-	- [ ] to add logger
-- [ ] to add comments
