@@ -58,12 +58,12 @@ def process_query(query_type, graph_type, input_path, output_path, seeds=[],
         ppr = PPR()
         ppr.read_graph(input_path, graph_type)
         r = ppr.compute(seeds, c, epsilon, max_iters)
-        node_ids = rwr.node_ids
+        node_ids = ppr.node_ids
     elif query_type == 'pagerank':
         pagerank = PageRank()
         pagerank.read_graph(input_path, graph_type)
         r = pagerank.compute(c, epsilon, max_iters)
-        node_ids = rwr.node_ids
+        node_ids = pagerank.node_ids
 
     write_vector(output_path, node_ids, r)
     print_result(node_ids, r)
