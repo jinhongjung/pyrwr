@@ -11,12 +11,12 @@ def row_normalize(A):
 
     inputs
         A : crs_matrix
-            input matrix
+            (n x n) input matrix where n is # of nodes
     outputs
         nA : crs_matrix
-            row normalized matrix
+             (n x n) row-normalized matrix
     '''
-    m, n = A.shape
+    n = A.shape[0]
 
     # do row-wise sum where d is out-degree for each node
     d = A.sum(axis=1)
@@ -26,7 +26,7 @@ def row_normalize(A):
     d = np.maximum(d, np.ones(n))
     invd = 1.0 / d
 
-    invD = spdiags(invd, 0, m, n)
+    invD = spdiags(invd, 0, n, n)
 
     # compute row normalized adjacency matrix by nA = invD * A
     nA = invD.dot(A)
