@@ -100,11 +100,11 @@ def read_graph(path, graph_type):
     # make node id start from 0
     X[:, 0:2] = X[:, 0:2] - base
 
-    if graph_type is "directed":
+    if graph_type == "directed":
         A = read_directed_graph(X, weighted)
-    elif graph_type is "undirected":
+    elif graph_type == "undirected":
         A = read_undirected_graph(X, weighted)
-    elif graph_type is "bipartite":
+    elif graph_type == "bipartite":
         pass
     #    A = _read_bipartite_graph(X)
     else:
