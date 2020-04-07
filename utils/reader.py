@@ -77,9 +77,6 @@ def read_graph(path, graph_type):
     X = np.loadtxt(path, dtype=float, comments='#')
     m, n = X.shape
 
-    # make src_id <= dst_id
-    X = swap_columns(X)
-
     weighted = True
     if n == 2:
         # the graph is unweighted
@@ -103,6 +100,8 @@ def read_graph(path, graph_type):
     if graph_type == "directed":
         A = read_directed_graph(X, weighted)
     elif graph_type == "undirected":
+        # make src_id <= dst_id
+        X = swap_columns(X)
         A = read_undirected_graph(X, weighted)
     elif graph_type == "bipartite":
         pass
