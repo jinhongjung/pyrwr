@@ -51,7 +51,7 @@ pyrwr --help
 ## Usage
 We provide the following simple command line usage:
 ```bash
-pyrwr --query-type rwr --graph-type directed --input-path data/directed/sample.tsv --output-path output/scores.tsv --seeds 987
+pyrwr --query-type rwr --graph-type directed --input-path data/directed/sample.tsv --output-path output/scores.tsv --seeds 10982
 ```
 This will compute an RWR score vector w.r.t. the seed node given by `--seeds` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`. `--query-type` specifies the type of query, e.g., this example indicates an RWR query.
 The detailed format of the input and output files is described below.
