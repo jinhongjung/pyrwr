@@ -19,7 +19,7 @@ def read_directed_graph(X, weighted):
     if not weighted:
         # no redundant edges are allowed for unweighted graphs
         I, J, K = find(A)
-        A = csr_matrix((np.ones(len(K), (I, J), shape=A.shape)))
+        A = csr_matrix((np.ones(len(K)), (I, J)), shape=A.shape)
 
     return A
 
