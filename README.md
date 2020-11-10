@@ -6,7 +6,7 @@ The representative applications include various real-world graph mining tasks su
 
 `pyrwr` aims to implement algorithms for computing RWR scores based on *Power Iteration* using numpy and scipy in Python.
 More specifically, `pyrwr` focuses on computing a single source RWR score vector w.r.t. a given query (seed) node, which is used for a personalized node ranking w.r.t. the querying node. 
-Besides RWR, `pyrwr` supports computing Personalized PageRank (PPR) and PageRank which are well-known variants of RWR.
+Besides RWR, `pyrwr` supports computing Personalized PageRank (PPR) with multiple seeds and PageRank which are well-known variants of RWR.
 
 The supported features of `pyrwr` are:
 * Query types
