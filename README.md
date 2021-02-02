@@ -15,8 +15,7 @@ The supported features of `pyrwr` are:
 	- PageRank: global ranking; all nodes are used as seeds
 * Graph types
 	- Unweighted/weighted graphs
-	- Directed graphs
-	- Undirected graphs 
+	- Undirected/directed graphs
 
 If you are interested in studying random walk based ranking models such as PageRank and RWR, please consider this hands-on tutorial (https://github.com/jinhongjung/tutorial-on-link-analysis) that provides how to correctly implement the algorithms of those models in Python and to analyze real-world networks using the ranking models.
 
