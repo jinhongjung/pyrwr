@@ -145,7 +145,7 @@ We summarize the input arguments of `pyrwr` in the following table:
 | `c` | `common` | Restart probablity (`rwr`) or jumping probability (otherwise) | `0.15`|
 | `epsilon` | `common` | Error tolerance for power iteration | `1e-9`|
 | `max-iters` | `common` | Maximum number of iterations for power iteration | `100`|
-| `handles_deadend` | `common` | If true, handles the deadend issue | `True`|
+| `handles-deadend` | `common` | If true, handles the deadend issue | `True`|
 
 The value of `Query Type` in the above table is one of the followings:
 * `common`: parameter of all of `rwr`, `ppr`, and `pagerank`
