@@ -21,7 +21,7 @@ def read_directed_graph(X, weighted):
         I, J, K = find(A)
         A = csr_matrix((np.ones(len(K)), (I, J)), shape=A.shape)
 
-    return Ak
+    return A
 
 
 def read_undirected_graph(X, weighted):
