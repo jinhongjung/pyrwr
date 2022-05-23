@@ -21,7 +21,7 @@ def read_directed_graph(X, weighted):
         I, J, K = find(A)
         A = csr_matrix((np.ones(len(K)), (I, J)), shape=A.shape)
 
-    return A
+    return Ak
 
 
 def read_undirected_graph(X, weighted):
@@ -84,7 +84,7 @@ def read_graph(path, graph_type):
         weighted = False
     elif n <= 1 or n >= 4:
         # undefined type
-        raise FormatError('Invalid input format')
+        raise ValueError('Invalid input format')
 
     base = np.amin(X[:, 0:2])
     min_weight = np.amin(X[:, 2])

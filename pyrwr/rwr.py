@@ -8,14 +8,15 @@ from .pyrwr import PyRWR
 
 class RWR(PyRWR):
     def __init__(self):
-        pass
+        super().__init__()
 
     def compute(self,
                 seed,
                 c=0.15,
                 epsilon=1e-6,
                 max_iters=100,
-                handles_deadend=True):
+                handles_deadend=True,
+                device='cpu'):
         '''
         Compute the RWR score vector w.r.t. the seed node
 
@@ -50,6 +51,8 @@ class RWR(PyRWR):
         q[seed] = 1.0
 
         r, residuals = iterator.iterate(self.nAT, q, c, epsilon,
-                                        max_iters, handles_deadend)
+                                        max_iters, handles_deadend,
+                                        norm_type=1,
+                                        device=device)
 
         return r

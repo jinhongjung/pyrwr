@@ -15,7 +15,8 @@ class PPR(PyRWR):
                 c=0.15,
                 epsilon=1e-9,
                 max_iters=100,
-                handles_deadend=True):
+                handles_deadend=True,
+                device='cpu'):
 
         '''
         Compute the PPR score vector w.r.t. the seed node
@@ -41,7 +42,7 @@ class PPR(PyRWR):
         self.normalize()
         seeds = [seed - self.base for seed in seeds]
 
-        if len(seeds) is 0:
+        if len(seeds) == 0:
             raise ValueError('Seeds are empty')
         if min(seeds) < 0 or max(seeds) >= self.n:
             raise ValueError('Out of range of seed node id')
@@ -51,6 +52,6 @@ class PPR(PyRWR):
         q[seeds] = 1.0 / len(seeds)
 
         r, residuals = iterator.iterate(self.nAT, q, c, epsilon,
-                                        max_iters, handles_deadend)
+                                        max_iters, handles_deadend, norm_type=1, device=device)
 
         return r

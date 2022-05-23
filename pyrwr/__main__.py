@@ -12,8 +12,16 @@ import numpy as np
 import pandas as pd
 
 
-def process_query(query_type, graph_type, input_path, output_path, seeds=[],
-                  c=0.15, epsilon=1e-9, max_iters=100, handles_deadend=True):
+def process_query(query_type,
+                  graph_type,
+                  input_path,
+                  output_path,
+                  seeds=[],
+                  c=0.15,
+                  epsilon=1e-9,
+                  max_iters=100,
+                  handles_deadend=True,
+                  device="cpu"):
     '''
     Processed a query to obtain a score vector w.r.t. the seeds
 
@@ -41,6 +49,10 @@ def process_query(query_type, graph_type, input_path, output_path, seeds=[],
             if true, it will handle the deadend issue in power iteration
             otherwise, it won't, i.e., no guarantee for sum of RWR scores
             to be 1 in directed graphs
+        device : string
+            type of computing device {'cpu', 'gpu'}
+            default is 'cpu' which will compute a query using numpy
+            if it is 'gpu', then it will compute a query using gpu based on pytorch
     outputs
         r : ndarray
             RWR score vector
@@ -51,19 +63,21 @@ def process_query(query_type, graph_type, input_path, output_path, seeds=[],
             raise TypeError('Seeds should be a single integer for RWR')
         rwr = RWR()
         rwr.read_graph(input_path, graph_type)
-        r = rwr.compute(int(seeds), c, epsilon, max_iters)
+        r = rwr.compute(int(seeds), c, epsilon, max_iters, handles_deadend, device)
         node_ids = rwr.node_ids
     elif query_type == 'ppr':
         seeds = get_seeds(seeds)
         ppr = PPR()
         ppr.read_graph(input_path, graph_type)
-        r = ppr.compute(seeds, c, epsilon, max_iters)
+        r = ppr.compute(seeds, c, epsilon, max_iters, handles_deadend, device)
         node_ids = ppr.node_ids
     elif query_type == 'pagerank':
         pagerank = PageRank()
         pagerank.read_graph(input_path, graph_type)
-        r = pagerank.compute(c, epsilon, max_iters)
+        r = pagerank.compute(c, epsilon, max_iters, handles_deadend, device)
         node_ids = pagerank.node_ids
+    else:
+        raise TypeError('query_type should be rwr, ppr, or pagerank')
 
     write_vector(output_path, node_ids, r)
     print_result(node_ids, r)
