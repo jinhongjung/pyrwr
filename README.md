@@ -10,12 +10,14 @@ Besides RWR, `pyrwr` supports computing Personalized PageRank (PPR) with multipl
 
 The supported features of `pyrwr` are:
 * Query types
-	- Random Walk with Restart (RWR): personalized ranking; only a single seed is allowed
-	- Personalized PageRank (PPR): personalized ranking; multiple seeds are allowed
-	- PageRank: global ranking; all nodes are used as seeds
+    - Random Walk with Restart (RWR): personalized ranking; only a single seed is allowed
+    - Personalized PageRank (PPR): personalized ranking; multiple seeds are allowed
+    - PageRank: global ranking; all nodes are used as seeds
 * Graph types
-	- Unweighted/weighted graphs
-	- Undirected/directed graphs
+    - Unweighted/weighted graphs
+    - Undirected/directed graphs
+* GPU computation
+	- If you have a gpu and set `device` to 'gpu', it will process your query on the gpu.
 
 If you are interested in studying random walk based ranking models such as PageRank and RWR, please consider this hands-on tutorial (https://github.com/jinhongjung/tutorial-on-link-analysis) that provides how to correctly implement the algorithms of those models in Python and to analyze real-world networks using the ranking models.
 
@@ -41,14 +43,22 @@ pyrwr --help
 * tqdm
 * fire
 * pandas
+* torch
 
 ## Usage
 We provide the following simple command line usage:
 ```bash
-pyrwr --query-type rwr --graph-type directed --input-path data/directed/sample.tsv --output-path output/scores.tsv --seeds 10982
+pyrwr --query-type rwr --graph-type directed --input-path data/directed/sample.tsv --output-path output/scores.tsv --seeds 10982 --device cpu
 ```
-This will compute an RWR score vector w.r.t. the seed node given by `--seeds` in the given graph specified by `--input-path`, and write the vector into the target file in `--output-path`. `--query-type` specifies the type of query, e.g., this example indicates an RWR query.
+This will compute an RWR score vector w.r.t. the seed node given by `--seeds` in the given graph specified by `--input-path` on a single cpu, and write the vector into the target file in `--output-path`. `--query-type` specifies the type of query, e.g., this example indicates an RWR query.
 The detailed format of the input and output files is described below.
+
+### Example Usage on GPU
+```bash
+CUDA_VISIBLE_DEVICES=1
+pyrwr --query-type rwr --graph-type directed --input-path data/directed/sample.tsv --output-path output/scores.tsv --seeds 10982 --device gpu
+```
+It commands try to compute the rwr query on the gpu whose device id is 1 if the gpu is available. If it's not available, an error will be raised.
 
 ## Input and Output Format
 
@@ -134,18 +144,20 @@ Note that for `pagerank`, we do not need to specify seeds since PageRank is a gl
 ## Arguments of `pyrwr`
 We summarize the input arguments of `pyrwr` in the following table:
 
-| Arguments     | Query Type | Explanation       | Default       | 
-| --------------|:------:|-------------------|:-------------:|
-| `query-type` | `common` | Query type among [rwr, ppr, pagerank] | `None`|
-| `graph-type` | `common` | Graph type among [directed, undirected] | `None` |
-| `input-path` | `common` | Input path for a graph | `None`|
-| `output-path` | `common` | Output path for storing a query result | `None`|
-| `seeds` | `rwr` | A single seed node id | `None`|
-| `seeds` | `ppr` | File path for seeds (`str`) or list of seeds (`list`) | `[]`|
-| `c` | `common` | Restart probablity (`rwr`) or jumping probability (otherwise) | `0.15`|
-| `epsilon` | `common` | Error tolerance for power iteration | `1e-9`|
-| `max-iters` | `common` | Maximum number of iterations for power iteration | `100`|
+| Arguments         | Query Type | Explanation | Default       | 
+|-------------------|:------:|--|:-------------:|
+| `query-type`      | `common` | Query type among [rwr, ppr, pagerank] | `None`|
+| `graph-type`      | `common` | Graph type among [directed, undirected] | `None` |
+| `input-path`      | `common` | Input path for a graph | `None`|
+| `output-path`     | `common` | Output path for storing a query result | `None`|
+| `seeds`           | `rwr` | A single seed node id | `None`|
+| `seeds`           | `ppr` | File path for seeds (`str`) or list of seeds (`list`) | `[]`|
+| `c`               | `common` | Restart probablity (`rwr`) or jumping probability (otherwise) | `0.15`|
+| `epsilon`         | `common` | Error tolerance for power iteration | `1e-9`|
+| `max-iters`       | `common` | Maximum number of iterations for power iteration | `100`|
 | `handles-deadend` | `common` | If true, handles the deadend issue | `True`|
+| `device`          | `common` | Computing device [cpu, gpu] | `cpu`|
+
 
 The value of `Query Type` in the above table is one of the followings:
 * `common`: parameter of all of `rwr`, `ppr`, and `pagerank`
@@ -155,7 +167,7 @@ The value of `Query Type` in the above table is one of the followings:
 
 Note the followings:
 * If you want to compute `pagerank` query, then do not need to specify `seeds`.
-* For directed graphs, there might be deadend nodes whose outdegree is zero. In this case, a naive power iteration would incur leaking out scores. 
+* For directed graphs, there might be deadend nodes whose out-degree is zero. In this case, a naive power iteration would incur leaking out scores. 
 `handles_deadend` exists for such issue handling deadend nodes. With `handles_deadend`, you can guarantee that the sum of a score vector is 1.
 Otherwise, the sum would less than 1 in directed graphs. 
 The strategy `pyrwr` exploits is that whenever a random surfer visits a deadend node, go back to a seed node (or one of seed nodes), and restart.

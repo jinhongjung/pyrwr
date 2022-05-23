@@ -117,8 +117,10 @@ def iterate_gpu(A,
     values = torch.from_numpy(A.data)
     A = torch.sparse_coo_tensor(indices, values, shaping).to(device)
     A = A.to_sparse_csr()
-    q = torch.from_numpy(q).to(device)
     residuals = torch.from_numpy(np.zeros(max_iters)).to(device)
+    q = torch.from_numpy(q).to(device)
+    if not handles_deadend:
+        q = q.view(-1, 1)
     data_elapsed = time.time() - start
     print("Sending data to gpu takes {:.4} sec".format(data_elapsed))
 
@@ -148,6 +150,8 @@ def iterate_gpu(A,
             pbar.update(1)
 
         pbar.close()
+        if not handles_deadend:
+            x = x.view(-1)
         x = x.cpu().numpy()
         residuals = residuals.cpu().numpy()
 
