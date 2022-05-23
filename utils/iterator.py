@@ -120,7 +120,7 @@ def iterate_gpu(A,
     residuals = torch.from_numpy(np.zeros(max_iters)).to(device)
     q = torch.from_numpy(q).to(device)
     if not handles_deadend:
-        q = q.view(-1, 1)
+        q = q.view(-1, 1) # for using torch.sparse.addmm in one line
     data_elapsed = time.time() - start
     print("Sending data to gpu takes {:.4} sec".format(data_elapsed))
 
@@ -136,7 +136,7 @@ def iterate_gpu(A,
                 S = torch.sum(x)
                 x = x + ((1 - S) * q)
             else:
-                # x = (1 - c) * (A.dot(old_x)) + (c * q)
+                # the below computes x = (1 - c) * (A.dot(old_x)) + (c * q)
                 x = torch.sparse.addmm(q, A, old_x, beta=c, alpha=(1-c))
 
             residuals[i] = torch.norm(x - old_x, p=norm_type)
