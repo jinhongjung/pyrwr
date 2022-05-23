@@ -9,15 +9,15 @@ More specifically, `pyrwr` focuses on computing a single source RWR score vector
 Besides RWR, `pyrwr` supports computing Personalized PageRank (PPR) with multiple seeds and PageRank which are well-known variants of RWR.
 
 The supported features of `pyrwr` are:
-* Query types
+* **Query types**
     - Random Walk with Restart (RWR): personalized ranking; only a single seed is allowed
     - Personalized PageRank (PPR): personalized ranking; multiple seeds are allowed
     - PageRank: global ranking; all nodes are used as seeds
-* Graph types
+* **Graph types**
     - Unweighted/weighted graphs
     - Undirected/directed graphs
-* GPU computation
-	- If you have a gpu and set `device` to 'gpu', it will process your query on the gpu.
+* **GPU computation**
+	- If you have a gpu and set `device` to 'gpu', it will process your query on the gpu using pytorch. Once the input data is transformed to the gpu, it computes the query more quickly compared to a cpu. If your graph is large, but fit to the gpu memory, try this option for fast computation.
 
 If you are interested in studying random walk based ranking models such as PageRank and RWR, please consider this hands-on tutorial (https://github.com/jinhongjung/tutorial-on-link-analysis) that provides how to correctly implement the algorithms of those models in Python and to analyze real-world networks using the ranking models.
 
