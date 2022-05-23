@@ -10,7 +10,10 @@ class PageRank(PyRWR):
     def __init__(self):
         pass
 
-    def compute(self, c=0.15, epsilon=1e-6, max_iters=100,
+    def compute(self,
+                c=0.15,
+                epsilon=1e-6,
+                max_iters=100,
                 handles_deadend=True):
         '''
         Compute the PageRank score vector (global ranking)

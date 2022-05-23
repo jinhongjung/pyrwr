@@ -8,9 +8,13 @@ from .pyrwr import PyRWR
 
 class PPR(PyRWR):
     def __init__(self):
-        pass
+        super().__init__()
 
-    def compute(self, seeds, c=0.15, epsilon=1e-9, max_iters=100,
+    def compute(self,
+                seeds,
+                c=0.15,
+                epsilon=1e-9,
+                max_iters=100,
                 handles_deadend=True):
 
         '''

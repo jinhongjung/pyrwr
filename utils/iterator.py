@@ -6,8 +6,14 @@ from numpy.linalg import norm
 from tqdm import tqdm
 
 
-def iterate(A, q, c=0.15, epsilon=1e-9,
-            max_iters=100, handles_deadend=True, norm_type=1):
+def iterate(A,
+            q,
+            c=0.15,
+            epsilon=1e-9,
+            max_iters=100,
+            handles_deadend=True,
+            norm_type=1,
+            device="cpu"):
     """
     Perform power iteration for RWR, PPR, or PageRank
 
@@ -32,11 +38,26 @@ def iterate(A, q, c=0.15, epsilon=1e-9,
         x : ndarray
             result vector
     """
+    if device == "cpu":
+        return iterate_cpu(A, q, c, epsilon, max_iters, handles_deadend, norm_type)
+    else:
+        # check the type
+        return iterate_gpu(A, q, c, epsilon, max_iters, handles_deadend, norm_type)
+
+
+def iterate_cpu(A,
+                q,
+                c=0.15,
+                epsilon=1e-9,
+                max_iters=100,
+                handles_deadend=True,
+                norm_type=1):
     x = q
     old_x = q
     residuals = np.zeros(max_iters)
 
     pbar = tqdm(total=max_iters)
+    i = 0
     for i in range(max_iters):
         if handles_deadend:
             x = (1 - c) * (A.dot(old_x))
@@ -50,7 +71,6 @@ def iterate(A, q, c=0.15, epsilon=1e-9,
 
         if residuals[i] <= epsilon:
             pbar.set_description("The iteration has converged at %d-iter" % (i))
-            #  pbar.update(max_iters)
             break
 
         old_x = x
@@ -59,3 +79,13 @@ def iterate(A, q, c=0.15, epsilon=1e-9,
     pbar.close()
 
     return x, residuals[0:i + 1]
+
+
+def iterate_gpu(A,
+                q,
+                c=0.15,
+                epsilon=1e-9,
+                max_iters=100,
+                handles_deadend=True,
+                norm_type=1):
+    pass

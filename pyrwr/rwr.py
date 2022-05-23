@@ -10,7 +10,11 @@ class RWR(PyRWR):
     def __init__(self):
         pass
 
-    def compute(self, seed, c=0.15, epsilon=1e-6, max_iters=100,
+    def compute(self,
+                seed,
+                c=0.15,
+                epsilon=1e-6,
+                max_iters=100,
                 handles_deadend=True):
         '''
         Compute the RWR score vector w.r.t. the seed node
