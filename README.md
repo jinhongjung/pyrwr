@@ -58,7 +58,7 @@ The detailed format of the input and output files is described below.
 CUDA_VISIBLE_DEVICES=1
 pyrwr --query-type rwr --graph-type directed --input-path data/directed/sample.tsv --output-path output/scores.tsv --seeds 10982 --device gpu
 ```
-It commands try to compute the rwr query on the gpu whose device id is 1 if the gpu is available. If it's not available, an error will be raised.
+It tries to compute the rwr query on the gpu whose device id is 1 if the gpu is available. If it's not available, an error will be raised.
 
 ## Input and Output Format
 
