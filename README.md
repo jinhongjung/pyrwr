@@ -105,7 +105,7 @@ The default output of `pyrwr` contains the single source RWR score vector w.r.t.
 ...
 ```
 
-## How to Use `pyrwr` in My Codes?
+## How to Use `pyrwr` in My Code?
 The following example shows how to import `pyrwr` and compute an RWR query.
 
 ```python
